@@ -36,7 +36,7 @@ class Meteostat:
                 config.read_file(f)
                 self.rapidApiKey = config['METEOSTAT']['RapidApiKey']
                 self.rapidApiHost = config['METEOSTAT']['RapidApiHost']
-                self.pointData = config['METEOSTAT']['PointData']
+                self.pointData = bool(config['METEOSTAT']['PointData'])
                 self.latitude = config['METEOSTAT']['Latitude']
                 self.longitude = config['METEOSTAT']['Longitude']
                 self.altitude = config['METEOSTAT']['Altitude']
@@ -45,6 +45,7 @@ class Meteostat:
                 self.stationLocation = config['METEOSTAT']['StationLocation']
                 self.timeZone = urllib.parse.quote(config['METEOSTAT']['TimeZone'], safe='')
                 numberOfRequestsPerDay = int(config['METEOSTAT']['NumberOfRequestsPerDay'])
+                self.numberOfDaysAhead = int(config['METEOSTAT']['NumberOfDaysAhead'])
                 self.sleepTimeSeconds = (24*60*60)/numberOfRequestsPerDay
                 self.influxdbUrl = config['INFLUXDB']['InfluxDbUrl']
                 self.influxdbToken = config['INFLUXDB']['InfluxDbToken']
@@ -58,9 +59,8 @@ class Meteostat:
         print("Running ...")
         while True:
             
-            #today plus next 5 days
             start = datetime.datetime.now() - datetime.timedelta(days=0)
-            end = start + datetime.timedelta(days=5)
+            end = start + datetime.timedelta(days=self.numberOfDaysAhead)
 
             conn = http.client.HTTPSConnection("meteostat.p.rapidapi.com")
             
