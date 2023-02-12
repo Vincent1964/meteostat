@@ -5,6 +5,7 @@
 #TODO LIST
 #############################################################################################################################
 # check what is needed in file header
+# ignore .vscode
 # make github project 
 # select right open source model, add copyright notice, write readme.md (I like MIT most)
 # pip package
