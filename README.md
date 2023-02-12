@@ -9,21 +9,22 @@ The following weather data is collected:
 |**tag**|**Description**|**data type**|
 |-------|---------------|-------------|
 | time    | Time of observation (YYYY-MM-DD hh:mm:ss)  | string        |
-| temp    | Air temperature in °C                  | float         |
-| dwpt    | Dew point in °C                        | float         |
-| rhum    | Relative humidity in percent (%)       | integer       |
-| prcp    | One-hour precipitation total in mm     | float         |
-| snow    | Snow depth in mm                       | integer       |
-| wdir    | Wind direction in degrees (°)          | integer       |
-| wspd    | Average wind speed in km/h             | float         |
-| wpgt    | Peak wind gust in km/h                 | float         |
-| pres    | Sea-level air pressure in millibar          | float         |
-| tsun    | One-hour sunshine total in minutes (m) | integer       |
-| coco    | Weather condition code                 | integer       |
+| temp    | Air temperature in °C                      | float         |
+| dwpt    | Dew point in °C                            | float         |
+| rhum    | Relative humidity in percent (%)           | integer       |
+| prcp    | One-hour precipitation total in mm         | float         |
+| snow    | Snow depth in mm                           | integer       |
+| wdir    | Wind direction in degrees (°)              | integer       |
+| wspd    | Average wind speed in km/h                 | float         |
+| wpgt    | Peak wind gust in km/h                     | float         |
+| pres    | Sea-level air pressure in millibar         | float         |
+| tsun    | One-hour sunshine total in minutes (min)*  | integer       |
+| coco    | Weather condition code**                   | integer       |
 
-More information on the weather condition code can be found [here](https://dev.meteostat.net/formats.html#weather-condition-codes).
+*) not always available
+**) more information on the weather condition code (coco) can be found [here](https://dev.meteostat.net/formats.html#weather-condition-codes).
 
-Forecast data is fetched for the next days and the script does not remove historical data from Influx.
+Forecast data is fetched for the next days and the script does not remove the historical data from InfluxDB.
 
 To collect weather data for a location the coordinates (latitude, longitude, altitude) can be used. Alternatively, a single weather station can be selected.
 
