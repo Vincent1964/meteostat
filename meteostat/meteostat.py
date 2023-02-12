@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-# coding=utf8
 
-#############################################################################################################################
-#TODO LIST
-#############################################################################################################################
-# check what is needed in file header
-# ignore .vscode
-# make github project 
-# select right open source model, add copyright notice, write readme.md (I like MIT most)
-# pip package
-# go live
+""" python3 script to fetch data from meteostat.net and store it in InfluxDB
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the Apache License 2.0 
+
+"""
+
+__author__ = "Vincent de Groot"
+__repository__ = "https://github.com/Vincent1964/meteostat"
+__date__ = "2023/02/12"
+__deprecated__ = False
+__license__ = "Apache License Version 2.0, January 2004"
+__maintainer__ = "Vincent de Groot"
+__status__ = "Production"
+__version__ = "0.0.1"
 
 import configparser
 from influxdb_client import InfluxDBClient, Point
@@ -99,7 +104,7 @@ class Meteostat:
             print("Weather data posted to influx ...")
             print("Sleep for " +  str((self.sleepTimeSeconds/60)) + " minutes ...")
             time.sleep(self.sleepTimeSeconds)
-        
+
 
 if __name__ == '__main__':
     meteostat = Meteostat()
