@@ -1,6 +1,6 @@
 # Meteostat to InfluxDB
 
-##Introduction
+## Introduction
 
 "Meteostat to InfluxDB" is a tool written in python to fetch weather forecast data from [meteostat.net](https://meteostat.net) and writes it into InfluxDB. Both InfluxDB 1 and Influx DB2 are supported.
 
@@ -25,7 +25,7 @@ Forecast data is fetched for the next 5 days and the tool does not remove histor
 
 To collect weather data for a location the coordinates (latitude, longitude, altitude) can be used. Alternatively, a single weather station can be selected.
 
-##Requirements
+## Requirements
 -   python3.7 or newer
 -   Influxdb (InfluxDB 1.8 or higher)
 -   InfluxDB 2.0 python client
@@ -33,15 +33,15 @@ To collect weather data for a location the coordinates (latitude, longitude, alt
 
 Meteostat weather data is collected via RapidAPI for this an account is needed. To get an account sign up on [RapidAPI](https://rapidapi.com/signup) and get an API key. Before you can use the API key, you'll need to subscribe to a [Meteostat plan](https://rapidapi.com/meteostat/api/meteostat/pricing). There exist a free plan that includes 500 monthly calls for free.
 
-##Environment
+## Environment
 - Grafana >=9.10
 
-##Install the script
+## Install the script
 1.  Get the script (meteostat.py) and the ini file template (meteostat.template.ini).
 2.  Rename the template to meteostat.ini and place it in a folder that fits to your system.
 3.  Edit the template and fill in required information.
 
-##Running the script
+## Running the script
 
 4.  Start the script with:
 
@@ -50,7 +50,7 @@ Meteostat weather data is collected via RapidAPI for this an account is needed. 
     ```
 5.  Check if weather data is stored in InfluxDB.
 
-##Visualization with Grafana
+## Visualization with Grafana
 
 Data source configuration for InfluxDB 1.8:
 
@@ -62,6 +62,5 @@ Data source configuration for InfluxDB \>=2.2.0:
 -   the "Query Language" Flux has to be selected
 -   the bucket with the fritzbox data has to be set as default bucket (all dashboards use the default bucket)
 
-##License
+## License
 This project is licensed under the [Apace License Version 2.0](https://github.com/Vincent1964/meteostat/blob/main/LICENSE).
-
