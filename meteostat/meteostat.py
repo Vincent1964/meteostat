@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-# coding=utf8
 
-#############################################################################################################################
-#TODO LIST
-#############################################################################################################################
-# check what is needed in file header
-# make github project 
-# select right open source model, add copyright notice, write readme.md (I like MIT most)
-# pip package
-# go live
+""" python3 script to fetch data from meteostat.net and store it in InfluxDB
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the Apache License 2.0 
+
+"""
+
+__author__ = "Vincent de Groot"
+__repository__ = "https://github.com/Vincent1964/meteostat"
+__date__ = "2023/02/12"
+__deprecated__ = False
+__license__ = "Apache License Version 2.0, January 2004"
+__maintainer__ = "Vincent de Groot"
+__status__ = "Production"
+__version__ = "0.0.1"
 
 import configparser
 from influxdb_client import InfluxDBClient, Point
@@ -36,7 +42,7 @@ class Meteostat:
                 config.read_file(f)
                 self.rapidApiKey = config['METEOSTAT']['RapidApiKey']
                 self.rapidApiHost = config['METEOSTAT']['RapidApiHost']
-                self.pointData = config['METEOSTAT']['PointData']
+                self.pointData = bool(config['METEOSTAT']['PointData'])
                 self.latitude = config['METEOSTAT']['Latitude']
                 self.longitude = config['METEOSTAT']['Longitude']
                 self.altitude = config['METEOSTAT']['Altitude']
@@ -45,6 +51,7 @@ class Meteostat:
                 self.stationLocation = config['METEOSTAT']['StationLocation']
                 self.timeZone = urllib.parse.quote(config['METEOSTAT']['TimeZone'], safe='')
                 numberOfRequestsPerDay = int(config['METEOSTAT']['NumberOfRequestsPerDay'])
+                self.numberOfDaysAhead = int(config['METEOSTAT']['NumberOfDaysAhead'])
                 self.sleepTimeSeconds = (24*60*60)/numberOfRequestsPerDay
                 self.influxdbUrl = config['INFLUXDB']['InfluxDbUrl']
                 self.influxdbToken = config['INFLUXDB']['InfluxDbToken']
@@ -58,9 +65,8 @@ class Meteostat:
         print("Running ...")
         while True:
             
-            #today plus next 5 days
             start = datetime.datetime.now() - datetime.timedelta(days=0)
-            end = start + datetime.timedelta(days=5)
+            end = start + datetime.timedelta(days=self.numberOfDaysAhead)
 
             conn = http.client.HTTPSConnection("meteostat.p.rapidapi.com")
             
@@ -98,7 +104,7 @@ class Meteostat:
             print("Weather data posted to influx ...")
             print("Sleep for " +  str((self.sleepTimeSeconds/60)) + " minutes ...")
             time.sleep(self.sleepTimeSeconds)
-        
+
 
 if __name__ == '__main__':
     meteostat = Meteostat()
