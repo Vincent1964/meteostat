@@ -64,7 +64,7 @@ Data source configuration for InfluxDB 1.8:
 -   the "Query Language" InfluxQL has to be selected
 -   DEPRECATED: these dashboards will not be developed/extended any further
 
-Data source configuration for InfluxDB \>=2.2.0:
+Data source configuration for InfluxDB \>=2.2.0 (not tested):
 
 -   the "Query Language" Flux has to be selected
 -   the bucket with the fritzbox data has to be set as default bucket (all dashboards use the default bucket)
